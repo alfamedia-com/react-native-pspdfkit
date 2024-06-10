@@ -3,7 +3,7 @@
  *
  *   PSPDFKit
  *
- *   Copyright © 2021-2023 PSPDFKit GmbH. All rights reserved.
+ *   Copyright © 2021-2024 PSPDFKit GmbH. All rights reserved.
  *
  *   THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
  *   AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -51,7 +51,9 @@ public class PdfViewDataReturnedEvent extends Event<PdfViewDataReturnedEvent> {
                     continue;
                 }
                 JSONObject instantJson = new JSONObject(annotation.toInstantJson());
-                annotationsSerialized.add(JsonUtilities.jsonObjectToMap(instantJson));
+                Map<String, Object> annotationMap = JsonUtilities.jsonObjectToMap(instantJson);
+                annotationMap.put("uuid", annotation.getUuid());
+                annotationsSerialized.add(annotationMap);
             }
 
             Map<String, Object> annotations = new HashMap<>();
@@ -65,6 +67,16 @@ public class PdfViewDataReturnedEvent extends Event<PdfViewDataReturnedEvent> {
     }
 
     public PdfViewDataReturnedEvent(@IdRes int viewId, int requestId, boolean result) {
+        super(viewId);
+        this.requestId = requestId;
+        Map<String, Object> map = new HashMap<>();
+        map.put("requestId", requestId);
+        map.put("result", result);
+
+        payload = Arguments.makeNativeMap(map);
+    }
+
+    public PdfViewDataReturnedEvent(@IdRes int viewId, int requestId, ArrayList result) {
         super(viewId);
         this.requestId = requestId;
         Map<String, Object> map = new HashMap<>();

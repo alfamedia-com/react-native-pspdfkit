@@ -3,7 +3,7 @@
  *
  *   PSPDFKit
  *
- *   Copyright © 2021-2023 PSPDFKit GmbH. All rights reserved.
+ *   Copyright © 2021-2024 PSPDFKit GmbH. All rights reserved.
  *
  *   THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
  *   AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -92,7 +92,7 @@ public class ReactGroupingRule extends PresetMenuItemGroupingRule {
             case "markup":
                 return com.pspdfkit.R.id.pspdf__annotation_creation_toolbar_group_markup;
             case "writing":
-                return com.pspdfkit.R.id.pspdf__annotation_creation_toolbar_item_writing;
+                return com.pspdfkit.R.id.pspdf__annotation_creation_toolbar_group_writing;
             case "highlight":
                 return com.pspdfkit.R.id.pspdf__annotation_creation_toolbar_item_highlight;
             case "squiggly":

@@ -1,5 +1,5 @@
 //
-//  Copyright © 2016-2023 PSPDFKit GmbH. All rights reserved.
+//  Copyright © 2016-2024 PSPDFKit GmbH. All rights reserved.
 //
 //  THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
 //  AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -129,17 +129,17 @@ RCT_EXPORT_METHOD(presentInstant: (NSDictionary*)documentData configuration: (NS
     }
     NSNumber* delay = [NSNumber numberWithInt:[configuration[@"delay"] intValue]];
     [parsedConfig removeObjectForKey:@"delay"];
+    
+    PSPDFConfiguration* pdfConfiguration = [[PSPDFConfiguration defaultConfiguration] configurationUpdatedWithBuilder:^(PSPDFConfigurationBuilder * _Nonnull builder) {
+        if([[configuration objectForKey:@"enableInstantComments"]  isEqual:@(YES)]) {
+            NSMutableSet *editableAnnotationTypes = [builder.editableAnnotationTypes mutableCopy];
+            [editableAnnotationTypes addObject:PSPDFAnnotationStringInstantCommentMarker];
+            builder.editableAnnotationTypes = editableAnnotationTypes;
+        }
+        [builder setupFromJSON:parsedConfig];
+    }];
 
-    PSPDFConfiguration* pdfConfiguration = [[PSPDFConfiguration alloc] initWithDictionary: parsedConfig error:&error];
-
-    InstantDocumentViewController *instantViewController = [[InstantDocumentViewController alloc] initWithDocumentInfo:documentInfo configurations: [pdfConfiguration configurationUpdatedWithBuilder:^(PSPDFConfigurationBuilder * builder) {
-        // Add `PSPDFAnnotationStringInstantCommentMarker` to the `editableAnnotationTypes` to enable editing of Instant Comments.
-        if([[configuration objectForKey:@"enableInstantComments"]  isEqual: @(YES)]) {
-                   NSMutableSet *editableAnnotationTypes = [builder.editableAnnotationTypes mutableCopy];
-                   [editableAnnotationTypes addObject:PSPDFAnnotationStringInstantCommentMarker];
-                   builder.editableAnnotationTypes = editableAnnotationTypes;
-               }
-           }] error:nil];
+    InstantDocumentViewController *instantViewController = [[InstantDocumentViewController alloc] initWithDocumentInfo:documentInfo configuration:pdfConfiguration error:&error];
 
     if ([delay doubleValue] > 0) {
         instantViewController.documentDescriptor.delayForSyncingLocalChanges = [delay doubleValue];

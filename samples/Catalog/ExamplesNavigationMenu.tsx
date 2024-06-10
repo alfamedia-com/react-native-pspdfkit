@@ -4,6 +4,8 @@ import {
   exampleDocumentName,
   exampleDocumentPath,
   exampleImagePath,
+  exampleReportName,
+  exampleXFDFName,
   tiffImagePath,
 } from './configuration/Constants';
 import exampleDocumentConfiguration, {
@@ -48,6 +50,15 @@ export default [
   },
   {
     key: 'item3',
+    name: 'Open a Remote Document in a PSPDFKitView Component',
+    description:
+      'Show how to open a remote document via URL inside a PSPDFKitView component.',
+    action: (component: any) => {
+      component.props.navigation.push('OpenRemoteDocument');
+    },
+  },
+  {
+    key: 'item4',
     name: 'Manual Save',
     description:
       'Add a toolbar at the bottom with a Save button and disable automatic saving.',
@@ -58,7 +69,7 @@ export default [
     },
   },
   {
-    key: 'item4',
+    key: 'item5',
     name: 'Save As',
     description: 'Save changes to the PDF in a separate file',
     action: (component: any) => {
@@ -68,7 +79,7 @@ export default [
     },
   },
   {
-    key: 'item5',
+    key: 'item6',
     name: 'Event Listeners',
     description:
       'Show how to use the listeners exposed by the PSPDFKitView component.',
@@ -77,7 +88,7 @@ export default [
     },
   },
   {
-    key: 'item6',
+    key: 'item7',
     name: 'Changing the State',
     description:
       'Add a toolbar at the bottom with buttons to toggle the annotation toolbar, and to programmatically change pages.',
@@ -86,7 +97,7 @@ export default [
     },
   },
   {
-    key: 'item7',
+    key: 'item8',
     name: 'Annotation Processing',
     description:
       'Show how to embed, flatten, remove, and print annotations; then present the newly processed document.',
@@ -97,7 +108,7 @@ export default [
     },
   },
   {
-    key: 'item8',
+    key: 'item9',
     name: 'Programmatic Annotations',
     description: 'Show how to get and add new annotations using Instant JSON.',
     action: (component: any) => {
@@ -105,7 +116,7 @@ export default [
     },
   },
   {
-    key: 'item9',
+    key: 'item10',
     name: 'Programmatic Form Filling',
     description:
       'Show how to get the value of a form element and how to programmatically fill forms.',
@@ -114,7 +125,7 @@ export default [
     },
   },
   Platform.OS === 'ios' && {
-    key: 'item10',
+    key: 'item11',
     name: 'Split PDF',
     description:
       'Show two PDFs side by side by using multiple PSPDFKitView components.',
@@ -123,7 +134,7 @@ export default [
     },
   },
   {
-    key: 'item11',
+    key: 'item12',
     name: 'Customize the Toolbar',
     description: 'Show how to customize buttons in the toolbar.',
     action: (component: any) => {
@@ -131,7 +142,7 @@ export default [
     },
   },
   {
-    key: 'item12',
+    key: 'item13',
     name: 'Hidden Toolbar',
     description:
       'Hide the main toolbar while keeping the thumbnail bar visible.',
@@ -140,7 +151,7 @@ export default [
     },
   },
   {
-    key: 'item13',
+    key: 'item14',
     name: 'Custom Font Picker',
     description:
       'Show how to customize the font picker for free text annotations.',
@@ -150,7 +161,7 @@ export default [
   },
   /// Present examples.
   {
-    key: 'item14',
+    key: 'item15',
     name: 'Open a Document Using the Native Module API',
     description:
       'Open a document using the Native Module API by passing its path.',
@@ -167,7 +178,7 @@ export default [
     },
   },
   {
-    key: 'item15',
+    key: 'item16',
     name: 'Customize Document Configuration',
     description:
       'Customize various aspects of the document by passing a configuration dictionary.',
@@ -176,7 +187,7 @@ export default [
     },
   },
   {
-    key: 'item16',
+    key: 'item17',
     name: 'Open an Image Document Using the Native Module API',
     description:
       'Open an image document using the Native Module API. Supported filetypes are PNG, JPEG and TIFF.',
@@ -186,7 +197,7 @@ export default [
     },
   },
   {
-    key: 'item17',
+    key: 'item18',
     name: 'Generate PDF',
     description: 'Generate a PDF from a template, images or html',
     action: (component: any) => {
@@ -196,7 +207,7 @@ export default [
     },
   },
   {
-    key: 'item18',
+    key: 'item19',
     name: 'PSPDFKit Instant',
     description: 'PSPDFKit Instant synchronisation example',
     action: (component: any) => {
@@ -206,7 +217,7 @@ export default [
     },
   },
   {
-    key: 'item19',
+    key: 'item20',
     name: 'PSPDFKit Measurement',
     description: 'PSPDFKit measurement tools example',
     action: (component: any) => {
@@ -216,12 +227,44 @@ export default [
     },
   },
   {
-    key: 'item20',
+    key: 'item21',
     name: 'Annotation Preset customization',
-    description: 'Customize default annotation presets',
+    description: 'Customize default annotation presets and annotation menu',
     action: (component: any) => {
       component.props.navigation.push('AnnotationPresetCustomization', {
         title: 'PSPDFKit preset customization',
+      });
+    },
+  },
+  {
+    key: 'item22',
+    name: 'Get PDFConfiguration',
+    description: 'Get and apply PDFConfiguration to a new instance',
+    action: (component: any) => {
+      component.props.navigation.push('GetConfiguration', {
+        title: 'Get PDFConfiguration',
+      });
+    },
+  },
+  {
+    key: 'item23',
+    name: 'Open Password Protected PDF',
+    description: 'Open a password protected PDF document',
+    action: (component: any) => {
+      component.props.navigation.push('PasswordProtectedDocument', {
+        title: 'PSPDFKitView Component',
+      });
+    },
+  },
+  {
+    key: 'item24',
+    name: 'XFDF Import and Export',
+    description: 'Import and export annotations from XFDF files',
+    action: (component: any) => {
+      extractFromAssetsIfMissing(exampleXFDFName, function () {
+        component.props.navigation.push('XFDF', {
+          title: 'XFDF Import and Export',
+        });
       });
     },
   },
@@ -244,7 +287,7 @@ const generatePDFMenu = [
         const { fileURL } = await Processor.generateBlankPDF(configuration);
 
         if (Platform.OS === 'android') {
-          PSPDFKit.present(fileURL, { title: 'Generate blank PDF' });
+          PSPDFKit.present(fileURL, { toolbarTitle: 'Generate blank PDF' });
           return;
         }
 
@@ -323,7 +366,7 @@ body {
 
         if (Platform.OS === 'android') {
           PSPDFKit.present(fileURL, {
-            title: 'Generate PDF from HTML string.',
+            toolbarTitle: 'Generate PDF from HTML string.',
           });
           return;
         }
@@ -376,7 +419,7 @@ body {
         // Do something with new file
 
         if (Platform.OS === 'android') {
-          PSPDFKit.present(fileURL, { title: 'Generate PDF from URL' });
+          PSPDFKit.present(fileURL, { toolbarTitle: 'Generate PDF from URL' });
           return;
         }
 
@@ -440,7 +483,7 @@ body {
         // In this example, we will open it in PSPDFKit view component from the same location where other pdf documents resides, PDFs folder in the root of the RN app
         if (Platform.OS === 'android') {
           PSPDFKit.present(fileURL, {
-            title: 'Generate PDF from template',
+            toolbarTitle: 'Generate PDF from template',
           });
           return;
         }
@@ -491,7 +534,7 @@ body {
           await Processor.generatePDFFromImages(configuration);
 
         if (Platform.OS === 'android') {
-          PSPDFKit.present(fileURL, { title: 'Generate PDF from images' });
+          PSPDFKit.present(fileURL, { toolbarTitle: 'Generate PDF from images' });
           return;
         }
 
@@ -522,7 +565,7 @@ body {
     name: 'Generate PDF from PDF documents',
     description: 'Generate PDF document from existing PDF documents.',
     action: async (component: any) => {
-      let fileName = 'PDFromDocuments';
+      let fileName = 'PDFFromDocuments';
       let outputFile = null;
       // For images from assets, you'll need to provide the global path for images in iOS.
       // In case you took image from the camera, you can use local path, instead.
@@ -557,26 +600,17 @@ body {
           await Processor.generatePDFFromDocuments(configuration);
 
         if (Platform.OS === 'android') {
-          PSPDFKit.present(fileURL, { title: 'Generate PDF from images' });
+          PSPDFKit.present(fileURL, { toolbarTitle: 'Generate PDF from PDF documents' });
           return;
         }
 
         // Do something with new file
         console.log('Your new file is stored in: ', fileURL);
-        // In this example, we will open it in PSPDFKit view component from the same location where other pdf documents resides, PDFs folder in the root of the RN app
-        await extractAsset(
-          fileURL,
-          documentName(fileName),
-          async (mainPath: any) => {
-            if (await fileExists(mainPath)) {
-              component.props.navigation.push('GeneratePDF', {
-                documentPath: `PDFs/${documentName(fileName)}`,
-                fullPath: mainPath,
-                title: 'Generate PDF from PDF documents',
-              });
-            }
-          },
-        );
+        component.props.navigation.push('GeneratePDF', {
+          documentPath: `PDFs/${documentName(fileName)}`,
+          fullPath: fileURL,
+          title: 'Generate PDF from PDF documents',
+        });
       } catch (e: any) {
         console.log(e.message, e.code);
         Alert.alert('PSPDFKit', e.message);

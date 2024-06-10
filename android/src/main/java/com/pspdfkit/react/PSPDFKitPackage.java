@@ -3,7 +3,7 @@
  *
  *   PSPDFKit
  *
- *   Copyright © 2017-2023 PSPDFKit GmbH. All rights reserved.
+ *   Copyright © 2017-2024 PSPDFKit GmbH. All rights reserved.
  *
  *   THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
  *   AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -33,13 +33,14 @@ public class PSPDFKitPackage implements ReactPackage {
         modules.add(new PSPDFKitModule(reactContext));
         modules.add(new TestingModule(reactContext));
         modules.add(new RNProcessor(reactContext));
+        modules.add(new PDFDocumentModule(reactContext));
         return modules;
     }
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> viewManagers = new ArrayList<>();
-        viewManagers.add(new ReactPdfViewManager());
+        viewManagers.add(new ReactPdfViewManager(reactContext));
         return viewManagers;
     }
 }

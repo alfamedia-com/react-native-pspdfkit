@@ -1,5 +1,5 @@
 //
-//  Copyright © 2019-2022 PSPDFKit GmbH. All rights reserved.
+//  Copyright © 2019-2024 PSPDFKit GmbH. All rights reserved.
 //
 //  The PSPDFKit Sample applications are licensed with a modified BSD license.
 //  Please see License for details. This notice may not be removed from this file.
@@ -20,7 +20,7 @@ public class InstantDocumentViewController: InstantViewController {
 
     @objc var manager: RCTPSPDFKitManager?
 
-    @objc public init(documentInfo: InstantDocumentInfo, configurations: PDFConfiguration) throws {
+    @objc public init(documentInfo: InstantDocumentInfo, configuration: PDFConfiguration) throws {
         /*
          Create the Instant objects with the information from the PSPDFKit for Web examples server.
 
@@ -35,7 +35,7 @@ public class InstantDocumentViewController: InstantViewController {
         // Store document info for sharing later.
         self.documentInfo = documentInfo
 
-        // Tell Instant to download the document from Web examples server’s PSPDFKit Server instance.
+        // Tell Instant to download the document from Web examples server’s PSPDFKit Document Engine instance.
         do {
             try documentDescriptor.download(usingJWT: documentInfo.jwt)
         } catch InstantError.alreadyDownloaded {
@@ -47,7 +47,7 @@ public class InstantDocumentViewController: InstantViewController {
         let pdfDocument = documentDescriptor.editableDocument
 
         // Set the document on the `PSPDFInstantViewController` (the superclass) so it can show the download progress, and then show the document.
-        super.init(document: pdfDocument,configuration: configurations)
+        super.init(document: pdfDocument, configuration:configuration)
     }
 
     @available(*, unavailable)

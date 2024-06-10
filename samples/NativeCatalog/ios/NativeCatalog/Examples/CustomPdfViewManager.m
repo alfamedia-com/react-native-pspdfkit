@@ -1,5 +1,5 @@
 //
-//  Copyright © 2020-2023 PSPDFKit GmbH. All rights reserved.
+//  Copyright © 2020-2024 PSPDFKit GmbH. All rights reserved.
 //
 //  THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
 //  AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -22,12 +22,12 @@ RCT_CUSTOM_VIEW_PROPERTY(document, PSPDFDocument, CustomPdfView) {
       NSString *path = json;
       if ([path hasSuffix:@"|ADD_WATERMARK"]) {
         path = [path stringByReplacingOccurrencesOfString:@"|ADD_WATERMARK" withString:@""];
-        view.pdfController.document = [RCTConvert PSPDFDocument:path];
+        view.pdfController.document = [RCTConvert PSPDFDocument:path remoteDocumentConfig:nil];
         [view createWatermarkAndReloadData:NO];
         return;
       }
     }
-    view.pdfController.document = [RCTConvert PSPDFDocument:json];
+    view.pdfController.document = [RCTConvert PSPDFDocument:json remoteDocumentConfig:nil];
   }
 }
 

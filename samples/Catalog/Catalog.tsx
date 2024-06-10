@@ -1,4 +1,4 @@
-//  Copyright © 2016-2023 PSPDFKit GmbH. All rights reserved.
+//  Copyright © 2016-2024 PSPDFKit GmbH. All rights reserved.
 //
 //  THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
 //  AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -30,7 +30,11 @@ import { SaveAs } from './examples/SaveAs';
 import { SplitPDF } from './examples/SplitPDF';
 import { StateChange } from './examples/StateChange';
 import { ToolbarCustomization } from './examples/ToolbarCustomization';
+import { GetConfiguration } from './examples/GetConfiguration';
+import { PasswordProtectedDocument } from './examples/PasswordProtectedDocument';
+import { XFDF } from './examples/XFDF';
 import { PSPDFKit } from './helpers/PSPDFKit';
+import { OpenRemoteDocument } from './examples/OpenRemoteDocument';
 
 // By default, this example doesn't set a license key, but instead runs in trial mode (which is the default, 
 // and requires SDK initialization with a null key).
@@ -67,6 +71,10 @@ class Catalog extends React.Component {
             name="OpenImageDocument"
             component={OpenImageDocument}
           />
+          <Stack.Screen
+            name="OpenRemoteDocument"
+            component={OpenRemoteDocument}
+          />
           <Stack.Screen name="ManualSave" component={ManualSave} />
           <Stack.Screen name="SaveAs" component={SaveAs} />
           <Stack.Screen name="EventListeners" component={EventListeners} />
@@ -101,6 +109,9 @@ class Catalog extends React.Component {
             name="AnnotationPresetCustomization"
             component={AnnotationPresetCustomization}
           />
+          <Stack.Screen name="GetConfiguration" component={GetConfiguration} />
+          <Stack.Screen name="PasswordProtectedDocument" component={PasswordProtectedDocument} />
+          <Stack.Screen name="XFDF" component={XFDF} />
         </Stack.Navigator>
       </NavigationContainer>
     );

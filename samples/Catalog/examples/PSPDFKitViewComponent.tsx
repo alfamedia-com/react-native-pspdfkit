@@ -1,5 +1,5 @@
 import React from 'react';
-import { processColor, View } from 'react-native';
+import { Alert, Button, processColor, View } from 'react-native';
 import PSPDFKitView from 'react-native-pspdfkit';
 
 import { exampleDocumentPath, pspdfkitColor } from '../configuration/Constants';
@@ -25,16 +25,32 @@ export class PSPDFKitViewComponent extends BaseExampleAutoHidingHeaderComponent 
           ref={this.pdfRef}
           document={exampleDocumentPath}
           configuration={{
-            allowToolbarTitleChange: false,
+            iOSAllowToolbarTitleChange: false,
             toolbarTitle: 'My Awesome Report',
-            backgroundColor: processColor('lightgrey'),
-            useParentNavigationBar: false,
+            iOSBackgroundColor: processColor('lightgrey'),
+            iOSUseParentNavigationBar: false,
           }}
           fragmentTag="PDF1"
           showNavigationButtonInToolbar={true}
           onNavigationButtonClicked={() => navigation.goBack()}
           style={styles.pdfColor}
         />
+        <View style={styles.wrapper}>
+          <View style={styles.flex}>
+            <Button
+              accessibilityLabel={'Get Document Info'}
+              testID={'Get Document Info'}
+              onPress={ async () => {
+                const document = this.pdfRef.current?.getDocument();
+                Alert.alert(
+                  'PSPDFKit',
+                  'Document ID: ' + await document?.getDocumentId(),
+                );
+              }}
+              title="Get Document Info"
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -42,4 +58,9 @@ export class PSPDFKitViewComponent extends BaseExampleAutoHidingHeaderComponent 
 const styles = {
   flex: { flex: 1 },
   pdfColor: { flex: 1, color: pspdfkitColor },
+  wrapper: {
+    flexDirection: 'row' as 'row',
+    alignItems: 'center' as 'center',
+    padding: 10,
+  },
 };

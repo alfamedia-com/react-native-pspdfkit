@@ -1,5 +1,6 @@
 package com.pspdfkit.react.helper
 
+import android.content.Context
 import java.io.File
 import java.util.Locale
 
@@ -16,7 +17,8 @@ class PSPDFKitUtils {
         )
 
         @JvmStatic
-        public fun isValidImage(file: File): Boolean {
+        public fun isValidImage(path: String): Boolean {
+            val file = File(path)
             for (extension in SUPPORTED_IMAGE_TYPES) {
                 if (file.name.lowercase(Locale.getDefault()).endsWith(extension)) {
                     return true
@@ -26,8 +28,14 @@ class PSPDFKitUtils {
         }
 
          @JvmStatic
-         public fun isValidPdf(file: File): Boolean {
-            return file.name.lowercase(Locale.getDefault()).endsWith(".pdf")
+         public fun isValidPdf(path: String): Boolean {
+             val file = File(path)
+             return file.name.lowercase(Locale.getDefault()).endsWith(".pdf")
+         }
+
+        @JvmStatic
+        public fun getCustomResourceId(resName: String, type: String, context: Context): Int {
+            return context.resources.getIdentifier(resName, type, context.packageName)
         }
     }
 }
