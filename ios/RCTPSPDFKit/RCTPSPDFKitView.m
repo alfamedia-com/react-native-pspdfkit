@@ -147,6 +147,7 @@ __weak typeof (self) weakSelf = self;
 
   PSPDFPageView *pageView = [weakSelf.pdfController pageViewForPageAtIndex:context.annotation.pageIndex];
   [weakSelf pdfViewController:weakSelf.pdfController didTapOnAnnotation:context.annotation annotationPoint:point annotationView:nil pageView:pageView viewPoint:point];
+  }];
   // ALFA END PATCH
 }
 
